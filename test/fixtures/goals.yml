@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  goaltype: MyString
+  completed: false
+  goalsteps: MyString
+
+two:
+  goaltype: MyString
+  completed: false
+  goalsteps: MyString
