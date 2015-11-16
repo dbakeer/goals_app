@@ -19,10 +19,11 @@ class SessionController < ApplicationController
       flash[:message] = "Email or Password Incorrect..."
       redirect_to root_path
   end
+end
 
   def current_user
     if session[:session_token]
-      @current_user ||= User.find_by(sessioN_token: session[:session_token])
+      @current_user ||= User.find_by(session_token: session[:session_token])
     else
       @current_user = nil
     end
@@ -41,7 +42,6 @@ class SessionController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permite(:email, :password)
+    params.require(:user).permit(:email, :password)
   end
-  
 end

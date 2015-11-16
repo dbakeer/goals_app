@@ -1,0 +1,15 @@
+///////////////////////////////////////
+////////////// GOALS APP //////////////
+///////////////////////////////////////
+var app = angular.module('goalsApp', ['ngRoute']);
+
+///////////////////////////////////////
+///////// HEADER CONTROLLER ///////////
+///////////////////////////////////////
+app.controller('HeaderController', ['$http', function($http){
+  var controller = this;
+
+  $http.get('/session').success(function(data){
+    controller.current_user = data.current_user;
+  });
+}]);
