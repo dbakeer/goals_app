@@ -19,7 +19,6 @@ app.controller('HeaderController', ['$http', function($http){
 ///////////////////////////////////////
 ////////// GOALS CONTROLLER ///////////
 ///////////////////////////////////////
-
 // controls the main goals which are akin to "posts" or "articles"
 app.controller('GoalController', ['$http', function($http){
 
@@ -53,8 +52,6 @@ app.controller('GoalController', ['$http', function($http){
       description: this.newGoalDescription
     });
 
-    console.log(controller.current_user_goals);
-
     $http.post('/goals', {
       authenticity_token: authenticity_token,
       goal: {
@@ -64,12 +61,36 @@ app.controller('GoalController', ['$http', function($http){
     }).success(function(data){
       controller.current_user_goals.pop();
       controller.current_user_goals.push(data.goal);
-      controller.getGoals();
-    }).error(function(data, err){
-      console.log("ERROR: ", data);
-      console.log("ERROR: ", err);
     });
+    controller.getGoals();
   };
+}]);
+
+
+///////////////////////////////////////
+////////// STEPS CONTROLLER ///////////
+///////////////////////////////////////
+app.controller('StepController', ['$http', '$scope', function($http, $scope){
+
+    var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    $scope.$parent.goal.steps = [];
+
+    this.createStep = function(){
+      $http.post('/goals/' +$scope.$parent.goal.id+ '/steps', {
+        authenticity_token: authenticity_token,
+        step: {
+          step: this.newStep
+        }
+      }).success(function(stepData){
+        console.log(stepData.step);
+        console.log($scope.$parent.goal);
+        console.log($scope.$parent.goal.steps);
+      });
+      $scope.$parent.goal.steps.push({
+        step: this.newStep
+      });
+    };
 }]);
 
 ///////////////////////////////////////
@@ -79,9 +100,13 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
   $locationProvider.html5Mode({ enabled: true });
 
-  $routeProvider.
-    when('/form', {
+  $routeProvider
+    .when('/form', {
       templateUrl: '/templates/form.html',
+      controller: 'GoalController',
+      controllerAs: 'goal'
+    }).when('/show', {
+      templateUrl: '/templates/show.html',
       controller: 'GoalController',
       controllerAs: 'goal'
     }).otherwise({
