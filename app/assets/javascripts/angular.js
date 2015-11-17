@@ -26,44 +26,55 @@ app.controller('GoalController', ['$http', function($http){
   // confirm the authenticity token
   var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-  // controller is "this"
   var controller = this;
 
-  // the goal categories
-  this.type = ['General', 'Health', 'Fitness', 'Personal', 'Professional'];
+  // the goal categories for selection in HTML
+  this.goal_types = [
+    'General',
+    'Health',
+    'Fitness',
+    'Personal',
+    'Professional'
+  ];
 
-  // obtaining the goal information for the current user
-  this.getGoal = function(){
+  this.newGoalType = 'General';
+
+  this.getGoals = function(){
     $http.get('/goals').success(function(data){
       controller.current_user_goals = data.goals;
     });
   };
 
-  this.getGoal();
+  this.getGoals();
 
   this.createGoal = function(){
     controller.current_user_goals.push({
-      description: this.description,
-      type: this.type
+      goal_type: this.newGoalType,
+      description: this.newGoalDescription
     });
+
+    console.log(controller.current_user_goals);
 
     $http.post('/goals', {
       authenticity_token: authenticity_token,
       goal: {
-        description: this.description,
-        type: this.type
+        goal_type: this.newGoalType,
+        description: this.newGoalDescription
       }
     }).success(function(data){
       controller.current_user_goals.pop();
       controller.current_user_goals.push(data.goal);
-      controller.getGoal();
+      controller.getGoals();
+    }).error(function(data, err){
+      console.log("ERROR: ", data);
+      console.log("ERROR: ", err);
     });
   };
 }]);
 
-//////////////////////////////////
-///// ROUTE CONTROLLER ///////////
-//////////////////////////////////
+///////////////////////////////////////
+////////// ROUTE CONTROLLER ///////////
+///////////////////////////////////////
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
 
   $locationProvider.html5Mode({ enabled: true });

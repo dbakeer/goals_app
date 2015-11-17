@@ -18,13 +18,14 @@ ActiveRecord::Schema.define(version: 20151116183442) do
 
   create_table "goals", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "description"
-    t.string   "type"
+    t.string   "description", null: false
+    t.string   "goal_type",   null: false
     t.boolean  "completed"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
+  add_index "goals", ["goal_type"], name: "index_goals_on_goal_type", using: :btree
   add_index "goals", ["user_id"], name: "index_goals_on_user_id", using: :btree
 
   create_table "steps", force: :cascade do |t|

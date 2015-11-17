@@ -4,13 +4,20 @@ class GoalsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :destroy
 
   def index
-    @goals = current_user.goals
+    @goals = current_user.goals.includes(:steps)
   end
 
   def create
     @goal = current_user.goals.new(goal_params)
 
     if @goal.save
+
+    else
+      render json: {
+        error: {
+          message: @goal.errors.full_messages.to_sentence
+        }
+      }
     end
   end
 
@@ -36,6 +43,7 @@ class GoalsController < ApplicationController
   private
 
   def goal_params
-    params.require(:goal).permit(:description, :type, :id)
+    params.require(:goal)
+          .permit(:description, :goal_type)
   end
 end

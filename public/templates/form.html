@@ -1,14 +1,14 @@
-  <form ng-submit="goal.createGoal()">
+<form ng-submit="goal.createGoal()">
 
-    Your Goal: <input type="text" ng-model="goal.description"></br>
+  Your Goal: <input type="text"ng-model="goal.newGoalDescription"></br>
 
-    <select>
-      <option value="General" ng-model="goal.type">General</option>
-      <option value="Health" ng-model="goal.type">Health</option>
-      <option value="Fitness" ng-model="goal.type">Fitness</option>
-      <option value="Personal" ng-model="goal.type">Personal</option>
-      <option value="Professional" ng-model="goal.type">Professional</option>
-    </select>
+  <select>
+    <option value="General" ng-model="goal.newGoalType">General</option>
+    <option value="Health" ng-model="goal.newGoalType">Health</option>
+    <option value="Fitness" ng-model="goal.newGoalType">Fitness</option>
+    <option value="Personal" ng-model="goal.newGoalType">Personal</option>
+    <option value="Professional" ng-model="goal.newGoalType">Professional</option>
+  </select>
 
-    <input type=submit value="SUBMIT">
-  </form>
+  <input type=submit value="SUBMIT">
+</form>
