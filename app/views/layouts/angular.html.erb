@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html ng-app="goalsApp">
 
 <head>
-
-  <title>GOALS APP</title>
+  <base href="/"> </base>
+  <title>GOAL APP</title>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
@@ -12,34 +13,34 @@
   <meta charset="utf-8">
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular-resource.min.js"></script>
 
-  <base href="/"> </base>
+
 
 </head>
+  <body>
+    <nav>
+    <header ng-controller="HeaderController as header">
+      <nav>
+        <h1>
 
-<body>
-
-  <nav>
-  <header ng-controller="HeaderController as header">
-    <span>
-      <h1>
-        <!-- logo -->
-        <span class="logo" class="animate">Goals App</span><br/>
-
-        <h3>Welcome, {{ header.current_user.email }} </h3>
-  </header>
+        </h1>
+      </nav>
+      <h3>Welcome, {{ header.current_user.email }} </h3><br/>
+      <a href="/form" class="headerlink">Post a New Goal!</a>
+    </header>
   </nav>
 
 
-  <%= yield %>
-   <div ng-view>
-</div>
+    <div ng-view>
+    </div>
 
 
-  <%= javascript_include_tag 'app', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'angular' %>
 
+  </body>
 
-</body>
 </html>

@@ -5,27 +5,45 @@
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application' %>
+
+  <%= javascript_include_tag 'angular' %>
+
   <%= csrf_meta_tags %>
+
 </head>
+
 <body>
+
   <% if flash[:message] %>
+
   <div class="flash">
+
     <%= flash[:message] %>
+
   </div>
+
   <% end %>
+
 <%= yield %>
 
 <% if current_user %>
+
 <hr/>
 
   <form action="<%= session_path %>" method="POST">
+
     <input class="form-control" type="hidden" name="authenticity_token"
       value="<%= form_authenticity_token %>">
+
     <input type="hidden" name="_method" value="DELETE">
+
     <br>
+
   </form>
 
 <% end %>
+
 </body>
+
 </html>

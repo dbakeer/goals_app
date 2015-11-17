@@ -1,0 +1,14 @@
+  <form ng-submit="goal.createGoal()">
+
+    Your Goal: <input type="text" ng-model="goal.description"></br>
+
+    <select>
+      <option value="General" ng-model="goal.type">General</option>
+      <option value="Health" ng-model="goal.type">Health</option>
+      <option value="Fitness" ng-model="goal.type">Fitness</option>
+      <option value="Personal" ng-model="goal.type">Personal</option>
+      <option value="Professional" ng-model="goal.type">Professional</option>
+    </select>
+
+    <input type=submit value="SUBMIT">
+  </form>
