@@ -1,13 +1,35 @@
+<div id = "add_goal_form">
+<form ng-submit="goal.createGoal()">
+
+  Your Goal: <input type="text"ng-model="goal.newGoalDescription"></br></br>
+
+  <select>
+    <option value="General" ng-model="goal.newGoalType">General</option>
+    <option value="Health" ng-model="goal.newGoalType">Health</option>
+    <option value="Fitness" ng-model="goal.newGoalType">Fitness</option>
+    <option value="Personal" ng-model="goal.newGoalType">Personal</option>
+    <option value="Professional" ng-model="goal.newGoalType">Professional</option>
+  </select>
+
+  <input type=submit value="SUBMIT">
+</form>
+</div>
+
+<br/>
+<br/>
+
 <div ng-repeat="goal in goal.current_user_goals |
                 orderBy: '-created_at'">
   <h1>{{goal.description}}</h1><br/>
   <h4>{{goal.goal_type}}</h4><br/>
 
+  <!-- <button type="button" ng-click="goal.deleteGoal(goal)">Delete Entire Goal</button><br/> -->
+
   <div id="individual_steps"
        ng-repeat="step in goal.steps">
-       {{step.step}}
+       {{step.step}}<br/>
   </div>
-
+    <br/>
   <div ng-controller="StepController as step"
        id = "create_step">
        Add your steps to your amazing goal:<br/>

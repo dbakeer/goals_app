@@ -36,8 +36,6 @@ app.controller('GoalController', ['$http', function($http){
     'Professional'
   ];
 
-  this.newGoalType = 'General';
-
   this.getGoals = function(){
     $http.get('/goals').success(function(data){
       controller.current_user_goals = data.goals;
@@ -72,18 +70,17 @@ app.controller('GoalController', ['$http', function($http){
   // };
 
   // delete a goal because it embarrasses you or something
-    this.deleteGoal = function(goal){
-    console.log(goal.id);
-    console.log(goal);
+  this.deleteGoal = function(goal){
     var index = controller.current_user_goals.indexOf(goal);
     controller.current_user_goals.splice(index, 1);
+    console.log(goal.id);
 
     $http.delete('/goals/' + goal.id, {
       authenticity_token: authenticity_token
-    }).success(function (data){
-      console.log("SUCCESS");
+    }).success(function(data){
+      console.log("SUCCESS: ", data);
     }).error(function(data, err){
-      console.log("ERROR");
+      console.log("ERROR: ", err);
     });
     controller.getGoals();
   };
@@ -122,12 +119,16 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $locationProvider.html5Mode({ enabled: true });
 
   $routeProvider
-    .when('/form', {
-      templateUrl: '/templates/form.html',
+    .when('/all', {
+      templateUrl: '/templates/all.html',
       controller: 'GoalController',
       controllerAs: 'goal'
-    }).when('/all', {
+    }).when('/goals/:id', {
       templateUrl: '/templates/all.html',
+      controller: 'GoalController',
+      controllerAs: 'goal'
+    }).when('/new', {
+      templateUrl: '/templates/new.html',
       controller: 'GoalController',
       controllerAs: 'goal'
     }).otherwise({
