@@ -63,6 +63,8 @@ app.controller('GoalController', ['$http', function($http){
       controller.current_user_goals.push(data.goal);
     });
     controller.getGoals();
+    this.newGoalDescription = '';
+    this.newGoalType = 'General';
   };
 
   // edit a goal
@@ -109,7 +111,6 @@ app.controller('StepController', ['$http', '$scope', function($http, $scope){
         }
       }).success(function(stepData){
       });
-      this.newStep = '';
     };
 }]);
 
@@ -121,16 +122,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $locationProvider.html5Mode({ enabled: true });
 
   $routeProvider
-    .when('/all', {
+    .when('/application/angular', {
       templateUrl: '/templates/all.html',
       controller: 'GoalController',
       controllerAs: 'goal'
     }).when('/goals/:id', {
       templateUrl: '/templates/all.html',
-      controller: 'GoalController',
-      controllerAs: 'goal'
-    }).when('/new', {
-      templateUrl: '/templates/new.html',
       controller: 'GoalController',
       controllerAs: 'goal'
     }).otherwise({
