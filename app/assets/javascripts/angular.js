@@ -64,6 +64,23 @@ app.controller('GoalController', ['$http', function($http){
     });
     controller.getGoals();
   };
+
+  // delete a goal because it embarrasses you or something
+//   this.deleteGoal = function(goal){
+//   console.log(goal.id);
+//   console.log(goal);
+//   var index = controller.current_user_goals.indexOf(goal);
+//   controller.current_user_goals.splice(index, 1);
+//
+//   $http.delete('/goals/' + goal.id, {
+//     authenticity_token: authenticity_token
+//   }).success(function (data){
+//     console.log("SUCCESS");
+//   }).error(function(data, err){
+//     console.log("ERROR");
+//   });
+//   controller.getGoals();
+// };
 }]);
 
 

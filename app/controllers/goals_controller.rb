@@ -38,6 +38,12 @@ class GoalsController < ApplicationController
   def destroy
     @goal = Goal.find(params[:id])
     @goal.destroy!
+
+    respond_to do |format|
+      format.json {
+        render json: @goal
+      }
+    end
   end
 
   private
