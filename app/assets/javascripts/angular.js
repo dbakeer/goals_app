@@ -36,6 +36,8 @@ app.controller('GoalController', ['$http', function($http){
     'Professional'
   ];
 
+  this.newGoalType = 'General';
+
   this.getGoals = function(){
     $http.get('/goals').success(function(data){
       controller.current_user_goals = data.goals;
