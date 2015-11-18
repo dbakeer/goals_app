@@ -1,5 +1,5 @@
-<div id = "add_goal_form">
-
+  <label>Create a new goal! <input type="checkbox" ng-model="show_form"></label><br/>
+<div id = "add_goal_form" ng-show="show_form">
 <form ng-submit="goal.createGoal()">
 
   Your Goal: <input type="text"ng-model="goal.newGoalDescription"></br></br>
