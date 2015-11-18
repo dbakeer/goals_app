@@ -86,10 +86,8 @@ app.controller('StepController', ['$http', '$scope', function($http, $scope){
           step: this.newStep
         }
       }).success(function(stepData){
-        console.log(stepData);
-        console.log($scope.$parent.goal);
-        console.log($scope.$parent.goal.steps);
       });
+      this.newStep = '';
     };
 }]);
 
