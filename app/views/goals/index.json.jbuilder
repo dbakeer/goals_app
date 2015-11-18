@@ -8,6 +8,6 @@ json.goals(@goals) do |goal|
 
   json.steps(goal.steps) do |step|
     json.id step.id
-    json.step goal.step
+    json.step step.step
   end
 end

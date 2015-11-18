@@ -74,21 +74,21 @@ app.controller('StepController', ['$http', '$scope', function($http, $scope){
 
     var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    $scope.$parent.goal.steps = [];
-
     this.createStep = function(){
+
+      $scope.$parent.goal.steps.push({
+        step: this.newStep
+      });
+
       $http.post('/goals/' +$scope.$parent.goal.id+ '/steps', {
         authenticity_token: authenticity_token,
         step: {
           step: this.newStep
         }
       }).success(function(stepData){
-        console.log(stepData.step);
+        console.log(stepData);
         console.log($scope.$parent.goal);
         console.log($scope.$parent.goal.steps);
-      });
-      $scope.$parent.goal.steps.push({
-        step: this.newStep
       });
     };
 }]);

@@ -4,6 +4,15 @@ class StepsController < ApplicationController
     goal = Goal.find(params[:goal_id])
 
     @step = goal.steps.new(step_params)
+
+    if @step.save
+    else
+      render json: {
+        error: {
+          message: @step.errors.full_messages.to_sentence
+        }
+      }
+    end
   end
 
   def show
