@@ -55,10 +55,31 @@
   <span>
   <br/>
 
+  <!-- EDIT BUTTON -->
+  <button ng-click="show_edit = !show_edit" ng-hide="show_edit == true">
+    Edit Your Goal
+  </button>
+
+  <form ng-submit="GoalCtrl.editGoal(goal)" ng-show="show_edit">
+    Create a new goal!
+  </button>
+
+    What is your goal?<br/>
+    <input type="text"
+     ng-model="goal.description"
+     placeholder="{{goal.description}}">
+
+    <input type="submit" value="Submit Edit" ng-click="show_edit = false">
+    <button type="button" ng-click="show_edit = false">Cancel</button>
+  </form>
+
   <!-- steps for the goal -->
   <div id="individual_steps"
        ng-repeat="step in goal.steps">
-       {{step.step}}
+       {{step.step}}<br/>
+    <div ng-controller="StepController as StepCtrl">
+       <button type="button" ng-click="StepCtrl.deleteStep(step)">DELETE</button>
+    </div>
   </div>
   <br/>
 

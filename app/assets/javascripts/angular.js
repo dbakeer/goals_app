@@ -3,6 +3,36 @@
 ///////////////////////////////////////
 var app = angular.module('goalsApp', ['ngRoute', 'ngResource']);
 
+
+///////////////////////////////////////
+////////// ROUTE CONTROLLER ///////////
+///////////////////////////////////////
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+
+  $locationProvider.html5Mode({ enabled: true });
+
+  $routeProvider
+    .when('/application/angular', {
+      templateUrl: '/templates/all.html',
+      controller: 'GoalController',
+      controllerAs: 'goal'
+    }).when('/goals/:goal_id', {
+      templateUrl: '/templates/all.html',
+      controller: 'GoalController',
+      controllerAs: 'goal'
+    }).when('/steps/:id', {
+      templateUrl: '/templates/all.html',
+      controller: 'GoalController',
+      controllerAs: 'goal'
+    }).when('/goals', {
+      templateUrl: '/templates/all.html',
+      controller: 'GoalController',
+      controllerAs: 'goal'
+    }).otherwise({
+      redirectTo: '/'
+    });
+}]);
+
 ///////////////////////////////////////
 ///////// HEADER CONTROLLER ///////////
 ///////////////////////////////////////
@@ -71,24 +101,22 @@ app.controller('GoalController', ['$http', '$location', '$routeParams', '$route'
 
 
   // edit a goal
-  // this.editGoal = function (goal) {
-  //   $http.patch('/goals/' + goal.id, {
-  //     goal: {
-  //       goal_type: this.newGoalType,
-  //       description: this.newGoalDescription
-  //     }
-  //   }).success(function(data){
-  //     controller.current_user_goals.splice(data);
-  //   });
-  //   controller.getGoals();
-  // };
+  this.editGoal = function(goal){
+    $http.patch('/goals/' + goal.id, {
+      authenticity_token: authenticity_token,
+      goal: {
+        description: goal.description
+      }
+    }).success(function(data){
+      console.log(data);
+    }).error(function(err){
+      console.log("ERROR: ", err);
+    });
+  };
 
 
   // delete a goal because it embarrasses you or something
-  // DOES NOT WORK YET
   this.deleteGoal = function(goal){
-
-
     $http.delete('/goals/' + goal.id, {
       authenticity_token: authenticity_token
     }).success(function(data){
@@ -102,10 +130,11 @@ app.controller('GoalController', ['$http', '$location', '$routeParams', '$route'
 ///////////////////////////////////////
 ////////// STEPS CONTROLLER ///////////
 ///////////////////////////////////////
-app.controller('StepController', ['$http', '$scope', function($http, $scope){
+app.controller('StepController', ['$http', '$scope', '$route', function($http, $scope, $route){
 
     var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+    // create a step
     this.createStep = function(){
 
       $scope.$parent.goal.steps.push({
@@ -120,29 +149,17 @@ app.controller('StepController', ['$http', '$scope', function($http, $scope){
       }).success(function(stepData){
       });
     };
-}]);
 
-///////////////////////////////////////
-////////// ROUTE CONTROLLER ///////////
-///////////////////////////////////////
-app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
-
-  $locationProvider.html5Mode({ enabled: true });
-
-  $routeProvider
-    .when('/application/angular', {
-      templateUrl: '/templates/all.html',
-      controller: 'GoalController',
-      controllerAs: 'goal'
-    }).when('/goals/:goal_id', {
-      templateUrl: '/templates/all.html',
-      controller: 'GoalController',
-      controllerAs: 'goal'
-    }).when('/goals', {
-      templateUrl: '/templates/all.html',
-      controller: 'GoalController',
-      controllerAs: 'goal'
-    }).otherwise({
-      redirectTo: '/'
-    });
+    // delete a step
+    // DOES NOT WORK YET
+    this.deleteStep = function(step){
+      $http.delete('/steps/' + step.id, {
+        authenticity_token: authenticity_token
+      }).success(function(data){
+        console.log(data);
+      }).error(function(err){
+        console.log("ERROR");
+      });
+      $route.reload();
+    };
 }]);

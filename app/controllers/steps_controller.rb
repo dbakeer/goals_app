@@ -16,8 +16,7 @@ class StepsController < ApplicationController
   end
 
   def show
-    goal = Goal.find(params[:goal_id])
-    @goal = goal.steps.find(step_params)
+    @step = Step.find(params[:id])
   end
 
   def index
@@ -37,9 +36,14 @@ class StepsController < ApplicationController
   end
 
   def destroy
-    goal = Goal.find(params[:goal_id])
-    @step = goal.steps.find(step_params)
-    @step.destroy
+    @step = Step.find(params[:id])
+    @step.destroy!
+
+    respond_to do |format|
+      format.json {
+        render json: @step
+      }
+    end
   end
 
   private
