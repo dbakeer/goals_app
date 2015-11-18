@@ -65,6 +65,12 @@ app.controller('GoalController', ['$http', function($http){
     controller.getGoals();
   };
 
+  // edit a goal
+  // this.editGoal = function(goal) {
+  //   console.log("goal is: ", goal);
+  //
+  // };
+
   // delete a goal because it embarrasses you or something
     this.deleteGoal = function(goal){
     console.log(goal.id);
