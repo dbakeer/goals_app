@@ -24,6 +24,7 @@ class GoalsController < ApplicationController
 
   def edit
     @goal = Goal.find(params[:id])
+    @goal.update(goal_params)
   end
 
   def update
@@ -36,13 +37,20 @@ class GoalsController < ApplicationController
   end
 
   def destroy
-    respond_with Goal.destroy(params[:id])
+    @goal = Goal.find(params[:id])
+    @goal.destroy!
+
+    respond_to do |format|
+      format.json {
+        render json: @goal
+      }
+    end
   end
 
   private
 
   def goal_params
     params.require(:goal)
-          .permit(:description, :goal_type)
+          .permit(:description, :goal_type, :id)
   end
 end

@@ -40,8 +40,9 @@
 
 
 <!-- SHOW ALL GOALS -->
-<div ng-repeat="goal in goal.current_user_goals |
+<div ng-controller="GoalController as GoalCtrl" ng-repeat="goal in goal.current_user_goals |
                 orderBy: '-created_at'">
+
   <!-- goal description -->
   <span id = "goaldescription">
     <h3>{{goal.description}}</h3>
@@ -86,4 +87,7 @@
       </button>
     </form>
   </div>
+  <button type="button" ng-click="GoalCtrl.deleteGoal(goal)">DELETE</button>
 </div>
+<br/>
+<br/>

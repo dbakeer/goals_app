@@ -67,27 +67,32 @@ app.controller('GoalController', ['$http', function($http){
     this.newGoalType = 'General';
   };
 
+
   // edit a goal
-  // this.editGoal = function(goal) {
-  //   console.log("goal is: ", goal);
-  //
-  // };
-
-  // delete a goal because it embarrasses you or something
-  this.deleteGoal = function(goal){
-    var index = controller.current_user_goals.indexOf(goal);
-    controller.current_user_goals.splice(index, 1);
-    console.log(goal.id);
-
-    $http.delete('/goals/' + goal.id, {
-      authenticity_token: authenticity_token
+  this.editGoal = function (goal) {
+    $http.patch('/goals/' + goal.id, {
+      goal: {
+        goal_type: this.newGoalType,
+        description: this.newGoalDescription
+      }
     }).success(function(data){
-      console.log("SUCCESS: ", data);
-    }).error(function(data, err){
-      console.log("ERROR: ", err);
+      controller.current_user_goals.splice(data);
     });
     controller.getGoals();
   };
+
+
+  // delete a goal because it embarrasses you or something
+  // DOES NOT WORK YET
+  this.deleteGoal = function(goal){
+    console.log(goal);
+    $http.delete('/goals/' + goal.id, {
+      authenticity_token: authenticity_token
+    }).success(function(data){
+      console.log(data);
+    });
+  };
+
 }]);
 
 
@@ -127,7 +132,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       templateUrl: '/templates/all.html',
       controller: 'GoalController',
       controllerAs: 'goal'
-    }).when('/goals/:id', {
+    }).when('/goals/:goal_id', {
       templateUrl: '/templates/all.html',
       controller: 'GoalController',
       controllerAs: 'goal'
