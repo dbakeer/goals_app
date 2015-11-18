@@ -2,6 +2,10 @@
   Goal Category: {{goal.goal_type}}<br/>
   Goal Description: {{goal.description}}<br/>
   Goal Id: {{goal.id}}<br/>
+  <form>
+  <input type="submit" id="delete"
+  ng-submit="goal.deleteGoal(goal)" value="DELETE">
+</form><br/>
 
   Your steps: <br/>
   <ul>
