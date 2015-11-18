@@ -1,6 +1,6 @@
-  <label>Create a new goal! <input type="checkbox" ng-model="show_form"></label><br/>
-<div id = "add_goal_form" ng-show="show_form">
-<form ng-submit="goal.createGoal()">
+<div id = "add_goal_form">
+<button ng-click="show_form = !show_form">Create a new goal!</button>
+<form ng-submit="goal.createGoal()" ng-show="show_form">
 
   Your Goal: <input type="text"ng-model="goal.newGoalDescription"></br></br>
 
@@ -8,7 +8,8 @@
     <option ng-repeat="goalType in goal.goal_types">{{goalType}}</option>
   </select>
 
-  <input type=submit value="SUBMIT">
+  <input type=submit value="SUBMIT" ng-click="show_form = false">
+  <button type="button" ng-click="show_form = false">Cancel</button>
 </form>
 </div>
 
