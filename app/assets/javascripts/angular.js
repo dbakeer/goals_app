@@ -20,7 +20,7 @@ app.controller('HeaderController', ['$http', function($http){
 ////////// GOALS CONTROLLER ///////////
 ///////////////////////////////////////
 // controls the main goals which are akin to "posts" or "articles"
-app.controller('GoalController', ['$http', function($http){
+app.controller('GoalController', ['$http', '$location', '$routeParams', '$route', function($http, $location, $routeParams, $route){
 
   // confirm the authenticity token
   var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -67,32 +67,35 @@ app.controller('GoalController', ['$http', function($http){
     this.newGoalType = 'General';
   };
 
+  this.getGoals();
+
 
   // edit a goal
-  this.editGoal = function (goal) {
-    $http.patch('/goals/' + goal.id, {
-      goal: {
-        goal_type: this.newGoalType,
-        description: this.newGoalDescription
-      }
-    }).success(function(data){
-      controller.current_user_goals.splice(data);
-    });
-    controller.getGoals();
-  };
+  // this.editGoal = function (goal) {
+  //   $http.patch('/goals/' + goal.id, {
+  //     goal: {
+  //       goal_type: this.newGoalType,
+  //       description: this.newGoalDescription
+  //     }
+  //   }).success(function(data){
+  //     controller.current_user_goals.splice(data);
+  //   });
+  //   controller.getGoals();
+  // };
 
 
   // delete a goal because it embarrasses you or something
   // DOES NOT WORK YET
   this.deleteGoal = function(goal){
-    console.log(goal);
+
+
     $http.delete('/goals/' + goal.id, {
       authenticity_token: authenticity_token
     }).success(function(data){
       console.log(data);
     });
+    $route.reload();
   };
-
 }]);
 
 
@@ -116,7 +119,6 @@ app.controller('StepController', ['$http', '$scope', function($http, $scope){
         }
       }).success(function(stepData){
       });
-      this.newStep = '';
     };
 }]);
 
@@ -133,6 +135,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       controller: 'GoalController',
       controllerAs: 'goal'
     }).when('/goals/:goal_id', {
+      templateUrl: '/templates/all.html',
+      controller: 'GoalController',
+      controllerAs: 'goal'
+    }).when('/goals', {
       templateUrl: '/templates/all.html',
       controller: 'GoalController',
       controllerAs: 'goal'
