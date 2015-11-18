@@ -126,8 +126,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       templateUrl: '/templates/form.html',
       controller: 'GoalController',
       controllerAs: 'goal'
-    }).when('/show', {
-      templateUrl: '/templates/show.html',
+    }).when('/all', {
+      templateUrl: '/templates/all.html',
       controller: 'GoalController',
       controllerAs: 'goal'
     }).otherwise({

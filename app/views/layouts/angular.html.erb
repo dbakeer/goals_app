@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 
-<html ng-app="goalsApp">
+  <html ng-app="goalsApp">
 
-<head>
+  <head>
+
   <base href="/"> </base>
-  <title>GOAL APP</title>
+
+  <title>G O A L S !</title>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
@@ -18,22 +20,23 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular-resource.min.js"></script>
 
+  </head>
 
-
-</head>
   <body>
-    <nav>
-    <header ng-controller="HeaderController as header">
-      <nav>
-        <h1>
 
-        </h1>
-      </nav>
+    <nav>
+
+      <header ng-controller="HeaderController as header">
+
       <h3>Welcome, {{ header.current_user.email }} </h3><br/>
-      <a href="/form" class="headerlink">Post a New Goal!</a><br/>
-      <a href="/show" class="headerlink">See Your Goals!</a>
-    </header>
-  </nav>
+
+      <a href="/form" class="headerlink">Post a New Goal!</a>  |
+
+      <a href="/all" class="headerlink">See Your Goals!</a>
+
+      </header>
+
+    </nav>
 
 
     <div ng-view>

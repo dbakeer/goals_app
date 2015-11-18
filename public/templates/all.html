@@ -1,16 +1,13 @@
 <div ng-repeat="goal in goal.current_user_goals |
                 orderBy: '-created_at'">
-  Goal Description: {{goal.description}}<br/>
-  Goal Category: {{goal.goal_type}}<br/>
+  <h1>{{goal.description}}</h1><br/>
+  <h4>{{goal.goal_type}}</h4><br/>
 
-
-  <div id = "steps">
-  Your steps: <br/>
   <div id="individual_steps"
        ng-repeat="step in goal.steps">
-       {{step.step}}</div>
-       <br/>
-       <br/>
+       {{step.step}}
+  </div>
+
   <div ng-controller="StepController as step"
        id = "create_step">
        Add your steps to your amazing goal:<br/>
@@ -19,7 +16,5 @@
       <input type="submit" value="Add step!">
     </form>
   </div>
-  <br/>
-  <br/>
-</div>
+  </div>
 </div>
