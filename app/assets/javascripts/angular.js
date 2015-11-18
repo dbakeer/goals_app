@@ -111,6 +111,7 @@ app.controller('StepController', ['$http', '$scope', function($http, $scope){
         }
       }).success(function(stepData){
       });
+      this.newStep = '';
     };
 }]);
 
