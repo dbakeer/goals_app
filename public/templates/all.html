@@ -1,37 +1,89 @@
+<!-- FORM FOR SUBMITTING A NEW GOAL! -->
 <div id = "add_goal_form">
-<button ng-click="show_form = !show_form">Create a new goal!</button>
-<form ng-submit="goal.createGoal()" ng-show="show_form">
 
-  Your Goal: <input type="text" ng-model="goal.newGoalDescription"></br></br>
+  <button ng-click="show_form = !show_form"
+          ng-hide="show_form == true">
+          Create a new goal!
+  </button>
 
-  <select ng-model="goal.newGoalType">
-    <option ng-repeat="goalType in goal.goal_types">{{goalType}}</option>
-  </select>
+  <form ng-submit="goal.createGoal()"
+        ng-show="show_form">
 
-  <input type=submit value="SUBMIT" ng-click="show_form = false">
-  <button type="button" ng-click="show_form = false">Cancel</button>
-</form>
+    What is your goal?<br/>
+    <input type="text"
+           ng-model="goal.newGoalDescription">
+
+    </br>
+    </br>
+
+    Pick a Category:<br/>
+    <select ng-model="goal.newGoalType">
+      <option ng-repeat="goalType in goal.goal_types">
+        {{goalType}}
+      </option>
+    </select>
+
+    <input type=submit
+           value="SUBMIT"
+           ng-click="show_form = false">
+
+    <button type="button"
+            ng-click="show_form = false">Cancel
+    </button>
+
+  </form>
+
 </div>
 
 <hr/>
+<!-- END FORM FOR SUBMITTING A NEW GOAL -->
 
+
+<!-- SHOW ALL GOALS -->
 <div ng-repeat="goal in goal.current_user_goals |
                 orderBy: '-created_at'">
-  <h1>{{goal.description}}</h1><br/>
-  <h4>{{goal.goal_type}}</h4><br/>
+  <!-- goal description -->
+  <span id = "goaldescription">
+    <h3>{{goal.description}}</h3>
+  </span>
+  <br/>
 
+  <!-- goal type -->
+  <span id= "goal_type">
+    <h4>{{goal.goal_type}}</h4>
+  <span>
+  <br/>
+
+  <!-- steps for the goal -->
   <div id="individual_steps"
        ng-repeat="step in goal.steps">
-       {{step.step}}<br/>
+       {{step.step}}
   </div>
-    <br/>
+  <br/>
+
+  <!-- BEGIN FORM FOR STEPS -->
   <div ng-controller="StepController as step"
        id = "create_step">
-       <button ng-click="show_form = !show_form">Add a step to your Goal!</button>
-    <form ng-submit="step.createStep()" ng-show="show_form">
-      <input type="text" ng-model="step.newStep">
-      <input type="submit" value="Add step!" ng-click="show_form = false">
-        <button type="button" ng-click="show_form = false">Cancel</button>
+
+    <button ng-click="show_form = !show_form"
+            ng-hide="show_form == true">
+      Add a step to your Goal!
+    </button>
+
+    <form ng-submit="step.createStep()"
+          ng-show="show_form">
+
+      <input type="text"
+             ng-model="step.newStep">
+
+      <input type="submit"
+             value="Add step!"
+             ng-click="show_form = false">
+
+      <button type="button"
+              ng-click="show_form = false">
+              Cancel
+      </button>
     </form>
   </div>
   </div>
