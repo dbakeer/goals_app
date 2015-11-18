@@ -65,26 +65,25 @@
   <div ng-controller="StepController as step"
        id = "create_step">
 
-    <button ng-click="show_form = !show_form"
-            ng-hide="show_form == true">
+    <button ng-click="steps_form = !steps_form"
+            ng-hide="steps_form == true">
       Add a step to your Goal!
     </button>
 
     <form ng-submit="step.createStep()"
-          ng-show="show_form">
+          ng-show="steps_form">
 
       <input type="text"
              ng-model="step.newStep">
 
       <input type="submit"
              value="Add step!"
-             ng-click="show_form = false">
+             ng-click="steps_form = false">
 
       <button type="button"
-              ng-click="show_form = false">
+              ng-click="steps_form = false">
               Cancel
       </button>
     </form>
-  </div>
   </div>
 </div>
