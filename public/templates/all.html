@@ -2,7 +2,7 @@
 <button ng-click="show_form = !show_form">Create a new goal!</button>
 <form ng-submit="goal.createGoal()" ng-show="show_form">
 
-  Your Goal: <input type="text"ng-model="goal.newGoalDescription"></br></br>
+  Your Goal: <input type="text" ng-model="goal.newGoalDescription"></br></br>
 
   <select ng-model="goal.newGoalType">
     <option ng-repeat="goalType in goal.goal_types">{{goalType}}</option>
@@ -27,10 +27,11 @@
     <br/>
   <div ng-controller="StepController as step"
        id = "create_step">
-       Add your steps to your amazing goal:<br/>
-    <form ng-submit="step.createStep()">
+       <button ng-click="show_form = !show_form">Add a step to your Goal!</button>
+    <form ng-submit="step.createStep()" ng-show="show_form">
       <input type="text" ng-model="step.newStep">
-      <input type="submit" value="Add step!">
+      <input type="submit" value="Add step!" ng-click="show_form = false">
+        <button type="button" ng-click="show_form = false">Cancel</button>
     </form>
   </div>
   </div>
