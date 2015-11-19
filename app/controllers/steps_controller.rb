@@ -25,13 +25,13 @@ class StepsController < ApplicationController
   end
 
   def edit
-    goal = Goal.find(params[:goal_id])
-    @step = goal.steps.find(step_params)
+    @step = Step.find(params[:id])
+    @step.update(step_params)
   end
 
   def update
-    goal = Goal.find(params[:goal_id])
-    @step = goal.steps.find(step_params)
+    @step = Step.find(params[:id])
+    @step.update(step_params)
     @step.save(step_params)
   end
 

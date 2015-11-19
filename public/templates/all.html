@@ -61,8 +61,7 @@
   </button>
 
   <form ng-submit="GoalCtrl.editGoal(goal)" ng-show="show_edit">
-    Create a new goal!
-  </button>
+    Edit your goal!
 
     What is your goal?<br/>
     <input type="text"
@@ -79,6 +78,14 @@
        {{step.step}}<br/>
     <div ng-controller="StepController as StepCtrl">
        <button type="button" ng-click="StepCtrl.deleteStep(step)">DELETE</button>
+
+       <!-- edit a step -->
+       <button ng-click="show_step_edit = !show_step_edit" ng-hide="show_step_edit == true">Edit Your Step</button>
+       <form ng-submit="StepCtrl.editStep(step)" ng-show="show_step_edit">
+         <input type="text" ng-model="step.step" placeholder="{{step.step}}">
+       <input type="submit" value="Submit Edit" ng-click="show_step_edit = false">
+       <button type="button" ng-click="show_step_edit = false">Cancel</button>
+     </form>
     </div>
   </div>
   <br/>

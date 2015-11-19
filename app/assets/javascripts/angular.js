@@ -148,10 +148,24 @@ app.controller('StepController', ['$http', '$scope', '$route', function($http, $
         }
       }).success(function(stepData){
       });
+      $route.reload();
+    };
+
+    // edit a step
+    this.editStep = function(step){
+      $http.patch('/steps/' + step.id, {
+        authenticity_token: authenticity_token,
+        step: {
+          step: step.step
+        }
+      }).success(function(data){
+        console.log(data);
+      }).error(function(err){
+        console.log("ERROR: ", err);
+      });
     };
 
     // delete a step
-    // DOES NOT WORK YET
     this.deleteStep = function(step){
       $http.delete('/steps/' + step.id, {
         authenticity_token: authenticity_token
