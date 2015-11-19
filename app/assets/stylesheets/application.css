@@ -31,3 +31,28 @@
    font-size: 24px;
    text-align: center;
  }
+
+ #goalformbutton {
+   font-family: 'Allan', cursive;
+   font-size: 24px;
+   border: 1px solid #666;
+   border-radius: 5px;
+   color: #000;
+   text-decoration: none;
+   padding: 8px 8px 8px 8px;
+ }
+
+ .descriptioninput {
+   padding: 5px;
+   border: solid 5px #c9c9c9;
+   border-radius: 5px;
+   box-shadow: inset 0 0 0 1px #707070;
+   transition: box-shadow 0.3s, border 0.3s;
+   font-size: 18px;
+   width: 400px;
+ }
+
+ .descriptioninput:focus,
+ .descriptioninput.focus {
+   border: solid 5px #969696;
+ }

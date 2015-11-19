@@ -3,7 +3,7 @@
 
   <button ng-click="show_form = !show_form"
           ng-hide="show_form == true"
-          id = "goalform">
+          id = "goalformbutton">
           Create a new goal!
   </button>
 
@@ -12,7 +12,8 @@
 
     What is your goal?<br/>
     <input type="text"
-           ng-model="goal.newGoalDescription">
+           ng-model="goal.newGoalDescription"
+           class="descriptioninput">
 
     </br>
     </br>
