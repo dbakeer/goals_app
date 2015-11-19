@@ -14,26 +14,28 @@
  *= require_self
  */
 
+ * {
+   font-family: 'Raleway', sans-serif;
+ }
+
  #title {
-   font-family: 'Allan', cursive;
+   font-family: 'Allan', cursive !important;
    font-size: 64px;
    text-align: center;
  }
 
  #byline {
-   font-family: 'Allan', cursive;
+   font-family: 'Allan', cursive !important;
    font-size: 24px;
    text-align: center;
  }
 
  #welcome {
-   font-family: 'Allan', cursive;
    font-size: 24px;
    text-align: center;
  }
 
  #goalformbutton {
-   font-family: 'Allan', cursive;
    font-size: 24px;
    border: 1px solid #666;
    border-radius: 5px;
