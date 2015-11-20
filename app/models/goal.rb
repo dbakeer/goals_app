@@ -1,13 +1,7 @@
 class Goal < ActiveRecord::Base
   inheritance_column = :_type_disabled
 
-  goal_types = [
-    'General',
-    'Health',
-    'Fitness',
-    'Personal',
-    'Professional'
-    ];
+  goal_types = ['General', 'Health', 'Fitness', 'Personal', 'Professional'];
 
   validates :description, presence: true
   validates :goal_type, presence: true

@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>GOALS!</title>
+  <title>G O L</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
@@ -11,8 +11,6 @@
     <h1 id="title">G O L</h1>
     <h2 id="byline">Track Your Goals | Dream Bigger</h2>
   </header>
-
-  <%= yield %>
 
   <h4 class="welcome">Sign up to get started!</h4>
 
@@ -42,7 +40,7 @@
      <button type="submit" class="btn btn-default">Sign in</button>
   </form>
 
-
+<%= yield %>
 
 </body>
 </html>

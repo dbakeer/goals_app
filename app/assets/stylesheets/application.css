@@ -58,3 +58,7 @@
  .descriptioninput.focus {
    border: solid 5px #969696;
  }
+
+ #general {
+   background: steelblue;
+ }

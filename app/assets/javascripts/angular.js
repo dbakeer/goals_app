@@ -50,7 +50,7 @@ app.controller('HeaderController', ['$http', function($http){
 ////////// GOALS CONTROLLER ///////////
 ///////////////////////////////////////
 // controls the main goals which are akin to "posts" or "articles"
-app.controller('GoalController', ['$http', '$location', '$routeParams', '$route', function($http, $location, $routeParams, $route){
+app.controller('GoalController', ['$http', '$location', '$routeParams', '$route', function($http, $location, $routeParams, $route, $scope){
 
   // confirm the authenticity token
   var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -58,15 +58,9 @@ app.controller('GoalController', ['$http', '$location', '$routeParams', '$route'
   var controller = this;
 
   // the goal categories for selection in HTML
-  this.goal_types = [
-    'General',
-    'Health',
-    'Fitness',
-    'Personal',
-    'Professional'
-  ];
-
   this.newGoalType = 'General';
+
+  this.goal_types = ['General', 'Health', 'Fitness', 'Personal', 'Professional'];
 
   this.getGoals = function(){
     $http.get('/goals').success(function(data){
