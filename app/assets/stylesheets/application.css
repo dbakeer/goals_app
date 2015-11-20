@@ -269,3 +269,17 @@ input[type=submit] {
   border-radius:28px;
   font-size: 18px;
 }
+
+select {
+   width: 200px;
+   height: 20px;
+   font-family: 'Raleway', sans-serif !important;
+   font-size: 18px;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}
+
+select:focus {
+  outline: none;
+}
