@@ -10,13 +10,13 @@ class SessionController < ApplicationController
       session[:session_token] = token
       user.update(session_token: token)
 
-      flash[:message] = "Successfully logged in"
+      flash[:message] = "You are now logged in!"
 
       redirect_to application_angular_path
 
     else
 
-      flash[:message] = "Email or Password Incorrect..."
+      flash[:message] = "Email/Password Incorrect"
       redirect_to root_path
   end
 end

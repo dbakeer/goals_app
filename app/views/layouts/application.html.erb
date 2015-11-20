@@ -19,21 +19,19 @@
 
 <body>
 
-  <% if flash[:message] %>
-
-  <div class="flash">
-
-    <%= flash[:message] %>
-
-  </div>
-
-  <% end %>
-
 <%= yield %>
 
-<% if current_user %>
+<% if flash[:message] %>
 
-<hr/>
+<div class="flash">
+
+  <%= flash[:message] %>
+
+</div>
+
+<% end %>
+
+<% if current_user %>
 
   <form action="<%= session_path %>" method="POST">
 

@@ -18,6 +18,34 @@
    font-family: 'Raleway', sans-serif;
  }
 
+ .flash {
+   text-align: center;
+ }
+
+ #signup {
+   display: inline-block;
+   float: left;
+   margin-left: 20%;
+   border: 1px solid black;
+   border-radius: 5px;
+   padding: 5px 5px 10px 5px;
+   text-align: center;
+   height: 25%;
+   width: 25%;
+ }
+
+ #login {
+   display: inline-block;
+   float: right;
+   margin-right: 20%;
+   border: 1px solid black;
+   border-radius: 5px;
+   padding: 5px 5px 10px 5px;
+   text-align: center;
+   height: 25%;
+   width: 25%;
+ }
+
  #title {
    font-family: 'Allan', cursive !important;
    font-size: 64px;
@@ -35,30 +63,209 @@
    text-align: center;
  }
 
+ #add_goal_form {
+   margin-bottom: 1%;
+ }
+
+ button {
+   background: transparent;
+   border: 1px solid #666;
+   -moz-border-radius:28px;
+   -webkit-border-radius:28px;
+   border-radius:28px;
+   font-size: 18px;
+ }
+
  #goalformbutton {
    font-size: 24px;
+   background: transparent;
    border: 1px solid #666;
-   border-radius: 5px;
+   -moz-border-radius:28px;
+	 -webkit-border-radius:28px;
+	 border-radius:28px;
    color: #000;
    text-decoration: none;
    padding: 8px 8px 8px 8px;
  }
 
- .descriptioninput {
-   padding: 5px;
-   border: solid 5px #c9c9c9;
+
+ #generalgoals {
+   background: #ff4d4d !important;
+   font-size: 36px !important;
    border-radius: 5px;
-   box-shadow: inset 0 0 0 1px #707070;
-   transition: box-shadow 0.3s, border 0.3s;
-   font-size: 18px;
-   width: 400px;
+   padding: 1% 0 1% 2%;
+   margin: 0 auto;
  }
 
- .descriptioninput:focus,
- .descriptioninput.focus {
-   border: solid 5px #969696;
+ #healthgoals {
+   background: #ffa64d !important;
+   font-size: 36px !important;
+   border-radius: 5px;
+   padding: 1% 0 1% 2%;
+   margin: 0 auto;
  }
 
- #general {
-   background: steelblue;
+ #fitnessgoals {
+   background: #4dff4d !important;
+   font-size: 36px !important;
+   border-radius: 5px;
+   padding: 1% 0 1% 2%;
+   margin: 0 auto;
  }
+
+ #personalgoals {
+   background: #4d4dff !important;
+   font-size: 36px !important;
+   border-radius: 5px;
+   padding: 1% 0 1% 2%;
+   margin: 0 auto;
+ }
+
+ #professionalgoals {
+   background: #a64dff !important;
+   font-size: 36px !important;
+   border-radius: 5px;
+   padding: 1% 0 1% 2%;
+   margin: 0 auto;
+ }
+
+ #goalform {
+   text-align: center;
+   display: table;
+   margin: 0 auto;
+ }
+
+ #goalformbutton {
+   display: table;
+   margin: 0 auto;
+ }
+
+ #general_goal {
+   background: #ff6666 !important;
+   border-radius: 5px;
+   font-size: 28px !important;
+   text-align: center;
+   margin-top: 0.1%;
+   padding: 1% 2% 1% 2%;
+ }
+
+ #health_goal {
+   background: #ffd966 !important;
+   border-radius: 5px;
+   font-size: 28px !important;
+   text-align: center;
+   margin-top: 0.1%;
+   padding: 1% 2% 1% 2%;
+ }
+
+ #fitness_goal {
+   background: #8cff66 !important;
+   border-radius: 5px;
+   font-size: 28px !important;
+   text-align: center;
+   margin-top: 0.1%;
+   padding: 1% 2% 1% 2%;
+ }
+
+ #personal_goal {
+   background:  #668cff !important;
+   border-radius: 5px;
+   font-size: 28px !important;
+   text-align: center;
+   margin-top: 0.1%;
+   padding: 1% 2% 1% 2%;
+ }
+
+ #professional_goal {
+   background: #d966ff !important;
+   border-radius: 5px;
+   font-size: 28px !important;
+   text-align: center;
+   margin-top: 0.1%;
+   padding: 1% 2% 1% 2%;
+ }
+
+ #general_steps {
+   background: #ffcccc !important;
+   border: 1px #ffffcc solid;
+   border-radius: 5px;
+   font-size: 18px !important;
+   margin: 0 5% 0 5%;
+   padding: 2% 2% 1% 2%;
+ }
+
+ #health_steps {
+   background: #ffff99 !important;
+   border: 1px #ffffcc solid;
+   border-radius: 5px;
+   font-size: 18px !important;
+   margin: 0 5% 0 5%;
+   padding: 2% 2% 1% 2%;
+ }
+
+ #fitness_steps {
+   background: #99ff99 !important;
+   border: 1px #ffffcc solid;
+   border-radius: 5px;
+   font-size: 18px !important;
+   margin: 0 5% 0 5%;
+   padding: 2% 2% 1% 2%;
+ }
+
+ #personal_steps {
+   background: #99e6ff !important;
+   border: 1px #ffffcc solid;
+   border-radius: 5px;
+   font-size: 18px !important;
+   margin: 0 5% 0 5%;
+   padding: 2% 2% 1% 2%;
+ }
+
+ #professional_steps {
+   background: #cc99ff !important;
+   border: 1px #ffffcc solid;
+   border-radius: 5px;
+   font-size: 18px !important;
+   margin: 0 5% 0 5%;
+   padding: 2% 2% 1% 2%;
+ }
+
+ #stepbuttons {
+   float: right;
+ }
+
+ #editgoalbutton {
+   float: right;
+ }
+
+ #create_step {
+   text-align: center;
+   display: table;
+   margin: 0 auto;
+ }
+
+ input[type=text] {
+  height:17px;
+  border-right: 0;
+  border-left: 0;
+  border-top: 0;
+  border-bottom: 1px black solid;
+  margin-left:1px;
+  padding: 5px;
+  font-size: 18px;
+  width: 600px;
+  background: transparent;
+}
+
+input[type=text]:focus {
+  outline: none;
+}
+
+input[type=submit] {
+  background: transparent;
+  border: 1px solid #666;
+  -moz-border-radius:28px;
+  -webkit-border-radius:28px;
+  border-radius:28px;
+  font-size: 18px;
+}

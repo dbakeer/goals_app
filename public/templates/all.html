@@ -4,38 +4,56 @@
   <button ng-click="show_form = !show_form"
           ng-hide="show_form == true"
           id = "goalformbutton">
-          Create a new goal!
+    Create a new goal!
   </button>
 
-  <form ng-submit="goal.createGoal()"
-        ng-show="show_form">
+  <div ng-show="show_form"
+       id = "goalform">
 
-    What is your goal?<br/>
-    <input type="text"
-           ng-model="goal.newGoalDescription"
-           class="descriptioninput">
+    <form ng-submit="goal.createGoal()">
 
-    </br>
-    </br>
+      What is your goal?
 
-    Pick a Category:<br/>
-    <select ng-model="goal.newGoalType">
-      <option ng-repeat="goalType in goal.goal_types">{{goalType}}</option>
-    </select>
+      <br/>
 
-    <input type=submit
-           value="SUBMIT"
-           ng-click="show_form = false">
+      <input type="text"
+             ng-model="goal.newGoalDescription" class="descriptioninput">
 
-    <button type="button"
-            ng-click="show_form = false">Cancel
-    </button>
 
-  </form>
+      </br>
+
+      </br>
+
+      Pick a Category:
+
+      <br/>
+
+      <select ng-model="goal.newGoalType">
+
+        <option ng-repeat="goalType in goal.goal_types">{{goalType}}</option>
+
+      </select>
+
+      <br/>
+
+      <br/>
+
+      <input type="submit"
+             value="SUBMIT"
+             ng-click="show_form = false">
+
+      <button type="button"
+              ng-click="show_form = false">
+        Cancel
+      </button>
+
+    </form>
+
+  </div>
 
 </div>
 
-<hr/>
+<br/>
 <!-- END FORM FOR SUBMITTING A NEW GOAL -->
 
 
@@ -44,376 +62,663 @@
 
 
 
-
 <!-- SHOW ALL GOALS -->
-<div ng-controller="GoalController as GoalCtrl">
+<div ng-controller="GoalController as GoalCtrl" id="showallgoals">
 
 
 
 
-  <!-- GENERAL GOALS -->
-  <div>
-    <h1>Your General Goals</h1>
-    <div ng-if="goal.goal_type == 'General'" ng-show="goal in goal.current_user_goals" ng-repeat="goal in goal.current_user_goals | orderBy: '-created_at'">
+  <!-- START GENERAL GOALS -->
+  <div id="allgeneralgoals">
 
-      <!-- Edit Goal Form Interface -->
-      <form ng-submit="GoalCtrl.editGoal(goal)" ng-show="show_edit">
-        Edit your goal!
-        <input type="text" ng-model="goal.description" placeholder="{{goal.description}}">
-        <input type="submit" value="Submit Edit" ng-click="show_edit = false">
-        <button type="button" ng-click="show_edit = false">Cancel</button>
-      </form>
+    <div id="generalgoals">
+      Your General Goals
+    </div>
 
-      <!-- Goal Description -->
-      <span ng-hide="show_edit == true">{{goal.description}}</span>
+      <div ng-if="goal.goal_type == 'General'"
+           ng-show="goal in goal.current_user_goals"
+           ng-repeat="goal in goal.current_user_goals |
+                      orderBy: '-created_at'">
 
-      <!-- Edit Button To Reveal Edit Interface -->
-      <button ng-click="show_edit = !show_edit" ng-hide="show_edit == true">
-        Edit Your Goal
-      </button>
+      <div id="general_goal">
 
-      <br/>
+        <form ng-submit="GoalCtrl.editGoal(goal)"
+              ng-show="show_edit">
 
-      <!-- STEPS SECTION -->
-      <div id="individual_steps" ng-repeat="step in goal.steps" ng-controller="StepController as StepCtrl">
-
-        <!-- edit form interface for individual steps -->
-        <form ng-submit="StepCtrl.editStep(step)" ng-show="show_step_edit">
-          <input type="text" ng-model="step.step" placeholder="{{step.step}}">
-          <input type="submit" value="Submit Edit" ng-click="show_step_edit = false">
-          <button type="button" ng-click="show_step_edit = false">Cancel</button>
-        </form>
-
-        <!-- individual steps -->
-        <span ng-hide="show_step_edit == true">{{step.step}}</span>
-
-        <!-- delete button -->
-        <button type="button" ng-click="StepCtrl.deleteStep(step)">Delete This Step</button>
-
-        <!-- button to initiate form to edit a step -->
-
-        <button ng-click="show_step_edit = !show_step_edit" ng-hide="show_step_edit == true">Edit This Step</button>
-
-      </div>
-
-
-      <!-- BEGIN FORM FOR STEPS -->
-      <div ng-controller="StepController as step" id = "create_step">
-        <button ng-click="steps_form = !steps_form" ng-hide="steps_form == true">
-          Add a step to your Goal!
-        </button>
-
-        <form ng-submit="step.createStep()" ng-show="steps_form">
-
-          <input type="text" ng-model="step.newStep">
-
-          <input type="submit" value="Add step!" ng-click="steps_form = false">
-
-          <button type="button" ng-click="steps_form = false">Cancel</button>
-      </form>
-     </div>
-
-    <!-- Delete Button for Entire Goal -->
-    <button type="button" ng-click="GoalCtrl.deleteGoal(goal)" ng-hide="show_edit == true">Delete this Goal</button>
-    <br/>
-    <br/>
-  </div>
-  <br/>
-  <br/>
-</div>
-
-
-
-
-  <!-- HEALTH GOALS -->
-  <div>
-    <h1>Your Health Goals</h1>
-    <div ng-if="goal.goal_type == 'Health'" ng-show="goal in goal.current_user_goals" ng-repeat="goal in goal.current_user_goals | orderBy: '-created_at'">
-
-      <!-- Edit Goal Form Interface -->
-      <form ng-submit="GoalCtrl.editGoal(goal)" ng-show="show_edit">
-        Edit your goal!
-        <input type="text" ng-model="goal.description" placeholder="{{goal.description}}">
-        <input type="submit" value="Submit Edit" ng-click="show_edit = false">
-        <button type="button" ng-click="show_edit = false">Cancel</button>
-      </form>
-
-      <!-- Goal Description -->
-      <span ng-hide="show_edit == true">{{goal.description}}</span>
-
-      <!-- Edit Button To Reveal Edit Interface -->
-      <button ng-click="show_edit = !show_edit" ng-hide="show_edit == true">
-        Edit Your Goal
-      </button>
-
-      <br/>
-
-      <!-- STEPS SECTION -->
-      <div id="individual_steps" ng-repeat="step in goal.steps" ng-controller="StepController as StepCtrl">
-
-        <!-- edit form interface for individual steps -->
-        <form ng-submit="StepCtrl.editStep(step)" ng-show="show_step_edit">
-          <input type="text" ng-model="step.step" placeholder="{{step.step}}">
-          <input type="submit" value="Submit Edit" ng-click="show_step_edit = false">
-          <button type="button" ng-click="show_step_edit = false">Cancel</button>
-        </form>
-
-        <!-- individual steps -->
-        <span ng-hide="show_step_edit == true">{{step.step}}</span>
-
-        <!-- delete button -->
-        <button type="button" ng-click="StepCtrl.deleteStep(step)">Delete This Step</button>
-
-        <!-- button to initiate form to edit a step -->
-
-        <button ng-click="show_step_edit = !show_step_edit" ng-hide="show_step_edit == true">Edit This Step</button>
-
-      </div>
-
-
-      <!-- BEGIN FORM FOR STEPS -->
-      <div ng-controller="StepController as step" id = "create_step">
-        <button ng-click="steps_form = !steps_form" ng-hide="steps_form == true">
-          Add a step to your Goal!
-        </button>
-
-        <form ng-submit="step.createStep()" ng-show="steps_form">
-
-          <input type="text" ng-model="step.newStep">
-
-          <input type="submit" value="Add step!" ng-click="steps_form = false">
-
-          <button type="button" ng-click="steps_form = false">Cancel</button>
-      </form>
-     </div>
-
-    <!-- Delete Button for Entire Goal -->
-    <button type="button" ng-click="GoalCtrl.deleteGoal(goal)" ng-hide="show_edit == true">Delete this Goal</button>
-    <br/>
-    <br/>
-  </div>
-  <br/>
-  <br/>
-</div>
-
-
-
-
-   <!-- FITNESS GOALS -->
-   <div>
-     <h1>Your Fitness Goals</h1>
-     <div ng-if="goal.goal_type == 'Fitness'" ng-show="goal in goal.current_user_goals" ng-repeat="goal in goal.current_user_goals | orderBy: '-created_at'">
-
-       <!-- Edit Goal Form Interface -->
-       <form ng-submit="GoalCtrl.editGoal(goal)" ng-show="show_edit">
-         Edit your goal!
-         <input type="text" ng-model="goal.description" placeholder="{{goal.description}}">
-         <input type="submit" value="Submit Edit" ng-click="show_edit = false">
-         <button type="button" ng-click="show_edit = false">Cancel</button>
-       </form>
-
-       <!-- Goal Description -->
-       <span ng-hide="show_edit == true">{{goal.description}}</span>
-
-       <!-- Edit Button To Reveal Edit Interface -->
-       <button ng-click="show_edit = !show_edit" ng-hide="show_edit == true">
-         Edit Your Goal
-       </button>
-
-       <br/>
-
-       <!-- STEPS SECTION -->
-       <div id="individual_steps" ng-repeat="step in goal.steps" ng-controller="StepController as StepCtrl">
-
-         <!-- edit form interface for individual steps -->
-         <form ng-submit="StepCtrl.editStep(step)" ng-show="show_step_edit">
-           <input type="text" ng-model="step.step" placeholder="{{step.step}}">
-           <input type="submit" value="Submit Edit" ng-click="show_step_edit = false">
-           <button type="button" ng-click="show_step_edit = false">Cancel</button>
-         </form>
-
-         <!-- individual steps -->
-         <span ng-hide="show_step_edit == true">{{step.step}}</span>
-
-         <!-- delete button -->
-         <button type="button" ng-click="StepCtrl.deleteStep(step)">Delete This Step</button>
-
-         <!-- button to initiate form to edit a step -->
-
-         <button ng-click="show_step_edit = !show_step_edit" ng-hide="show_step_edit == true">Edit This Step</button>
-
-       </div>
-
-
-       <!-- BEGIN FORM FOR STEPS -->
-       <div ng-controller="StepController as step" id = "create_step">
-         <button ng-click="steps_form = !steps_form" ng-hide="steps_form == true">
-           Add a step to your Goal!
-         </button>
-
-         <form ng-submit="step.createStep()" ng-show="steps_form">
-
-           <input type="text" ng-model="step.newStep">
-
-           <input type="submit" value="Add step!" ng-click="steps_form = false">
-
-           <button type="button" ng-click="steps_form = false">Cancel</button>
-       </form>
-      </div>
-
-     <!-- Delete Button for Entire Goal -->
-     <button type="button" ng-click="GoalCtrl.deleteGoal(goal)" ng-hide="show_edit == true">Delete this Goal</button>
-     <br/>
-     <br/>
-   </div>
-   <br/>
-   <br/>
- </div>
-
-
-
-
-    <!-- PERSONAL GOALS -->
-    <div>
-      <h1>Your Personal Goals</h1>
-      <div ng-if="goal.goal_type == 'Personal'" ng-show="goal in goal.current_user_goals" ng-repeat="goal in goal.current_user_goals | orderBy: '-created_at'">
-
-        <!-- Edit Goal Form Interface -->
-        <form ng-submit="GoalCtrl.editGoal(goal)" ng-show="show_edit">
           Edit your goal!
-          <input type="text" ng-model="goal.description" placeholder="{{goal.description}}">
-          <input type="submit" value="Submit Edit" ng-click="show_edit = false">
-          <button type="button" ng-click="show_edit = false">Cancel</button>
+
+          <input type="text"
+                 ng-model="goal.description" placeholder="{{goal.description}}">
+
+          <input type="submit"
+                 value="Submit Edit"
+                ng-click="show_edit = false">
+
+          <button type="button"
+                  ng-click="show_edit = false">
+            Cancel
+          </button>
+
         </form>
 
-        <!-- Goal Description -->
-        <span ng-hide="show_edit == true">{{goal.description}}</span>
-
-        <!-- Edit Button To Reveal Edit Interface -->
-        <button ng-click="show_edit = !show_edit" ng-hide="show_edit == true">
-          Edit Your Goal
-        </button>
+        <span ng-hide="show_edit == true">
+          {{goal.description}}
+        </span>
 
         <br/>
 
-        <!-- STEPS SECTION -->
-        <div id="individual_steps" ng-repeat="step in goal.steps" ng-controller="StepController as StepCtrl">
+        <div id="editgoalbutton">
 
-          <!-- edit form interface for individual steps -->
-          <form ng-submit="StepCtrl.editStep(step)" ng-show="show_step_edit">
-            <input type="text" ng-model="step.step" placeholder="{{step.step}}">
-            <input type="submit" value="Submit Edit" ng-click="show_step_edit = false">
-            <button type="button" ng-click="show_step_edit = false">Cancel</button>
-          </form>
+          <button ng-click="show_edit = !show_edit"
+                  ng-hide="show_edit == true">
+            Edit Your Goal
+          </button>
 
-          <!-- individual steps -->
-          <span ng-hide="show_step_edit == true">{{step.step}}</span>
-
-          <!-- delete button -->
-          <button type="button" ng-click="StepCtrl.deleteStep(step)">Delete This Step</button>
-
-          <!-- button to initiate form to edit a step -->
-
-          <button ng-click="show_step_edit = !show_step_edit" ng-hide="show_step_edit == true">Edit This Step</button>
-
+          <button type="button"
+                  ng-click="GoalCtrl.deleteGoal(goal)"
+                  ng-hide="show_edit == true">
+            Delete this Goal
+          </button>
         </div>
 
+        <div ng-controller="StepController as step"
+             id = "create_step">
 
-        <!-- BEGIN FORM FOR STEPS -->
-        <div ng-controller="StepController as step" id = "create_step">
-          <button ng-click="steps_form = !steps_form" ng-hide="steps_form == true">
+          <button ng-click="steps_form = !steps_form"
+                  ng-hide="steps_form == true">
             Add a step to your Goal!
           </button>
 
-          <form ng-submit="step.createStep()" ng-show="steps_form">
+          <form ng-submit="step.createStep()"
+                ng-show="steps_form">
 
-            <input type="text" ng-model="step.newStep">
+            <input type="text"
+                   ng-model="step.newStep">
 
-            <input type="submit" value="Add step!" ng-click="steps_form = false">
+            <br/>
 
-            <button type="button" ng-click="steps_form = false">Cancel</button>
+            <input type="submit"
+                   value="Add step!"
+                   ng-click="steps_form = false">
+
+            <button type="button"
+                    ng-click="steps_form = false">
+              Cancel
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+      <div id="general_steps"
+           ng-repeat="step in goal.steps"
+           ng-controller="StepController as StepCtrl">
+
+        <form ng-submit="StepCtrl.editStep(step)"
+              ng-show="show_step_edit">
+
+          <input type="text"
+                 ng-model="step.step"
+                 placeholder="{{step.step}}">
+
+          <input type="submit"
+                 value="Submit Edit"
+                 ng-click="show_step_edit = false">
+
+          <button type="button"
+                  ng-click="show_step_edit = false">
+            Cancel
+          </button>
+
         </form>
-       </div>
 
-      <!-- Delete Button for Entire Goal -->
-      <button type="button" ng-click="GoalCtrl.deleteGoal(goal)" ng-hide="show_edit == true">Delete this Goal</button>
-      <br/>
-      <br/>
+        <span ng-hide="show_step_edit == true">
+          {{step.step}}
+        </span>
+
+        <div id="stepbuttons">
+
+          <button type="button"
+                  ng-click="StepCtrl.deleteStep(step)"
+                  ng-hide="show_step_edit == true">
+            Delete This Step
+          </button>
+
+          <button ng-click="show_step_edit = !show_step_edit"
+                  ng-hide="show_step_edit == true">
+            Edit This Step
+          </button>
+
+        </div>
+      </div>
     </div>
-    <br/>
-    <br/>
   </div>
+  <!-- END GENERAL GOALS -->
 
 
+  <br/>
 
+  <!-- START HEALTH GOALS -->
+  <div id="allhealthgoals">
 
-     <!-- PROFESSIONAL GOALS -->
-     <div>
-       <h1>Your Professional Goals</h1>
-       <div ng-if="goal.goal_type == 'Professional'" ng-show="goal in goal.current_user_goals" ng-repeat="goal in goal.current_user_goals | orderBy: '-created_at'">
+    <div id="healthgoals">
+      Your Health Goals
+    </div>
 
-         <!-- Edit Goal Form Interface -->
-         <form ng-submit="GoalCtrl.editGoal(goal)" ng-show="show_edit">
-           Edit your goal!
-           <input type="text" ng-model="goal.description" placeholder="{{goal.description}}">
-           <input type="submit" value="Submit Edit" ng-click="show_edit = false">
-           <button type="button" ng-click="show_edit = false">Cancel</button>
-         </form>
+      <div ng-if="goal.goal_type == 'Health'"
+           ng-show="goal in goal.current_user_goals"
+           ng-repeat="goal in goal.current_user_goals |
+                      orderBy: '-created_at'">
 
-         <!-- Goal Description -->
-         <span ng-hide="show_edit == true">{{goal.description}}</span>
+      <div id="health_goal">
 
-         <!-- Edit Button To Reveal Edit Interface -->
-         <button ng-click="show_edit = !show_edit" ng-hide="show_edit == true">
-           Edit Your Goal
-         </button>
+        <form ng-submit="GoalCtrl.editGoal(goal)"
+              ng-show="show_edit">
 
-         <br/>
+          Edit your goal!
 
-         <!-- STEPS SECTION -->
-         <div id="individual_steps" ng-repeat="step in goal.steps" ng-controller="StepController as StepCtrl">
+          <input type="text"
+                 ng-model="goal.description" placeholder="{{goal.description}}">
 
-           <!-- edit form interface for individual steps -->
-           <form ng-submit="StepCtrl.editStep(step)" ng-show="show_step_edit">
-             <input type="text" ng-model="step.step" placeholder="{{step.step}}">
-             <input type="submit" value="Submit Edit" ng-click="show_step_edit = false">
-             <button type="button" ng-click="show_step_edit = false">Cancel</button>
-           </form>
+          <input type="submit"
+                 value="Submit Edit"
+                ng-click="show_edit = false">
 
-           <!-- individual steps -->
-           <span ng-hide="show_step_edit == true">{{step.step}}</span>
+          <button type="button"
+                  ng-click="show_edit = false">
+            Cancel
+          </button>
 
-           <!-- delete button -->
-           <button type="button" ng-click="StepCtrl.deleteStep(step)">Delete This Step</button>
+        </form>
 
-           <!-- button to initiate form to edit a step -->
+        <span ng-hide="show_edit == true">
+          {{goal.description}}
+        </span>
 
-           <button ng-click="show_step_edit = !show_step_edit" ng-hide="show_step_edit == true">Edit This Step</button>
+        <br/>
 
-         </div>
+        <div id="editgoalbutton">
 
+          <button ng-click="show_edit = !show_edit"
+                  ng-hide="show_edit == true">
+            Edit Your Goal
+          </button>
 
-         <!-- BEGIN FORM FOR STEPS -->
-         <div ng-controller="StepController as step" id = "create_step">
-           <button ng-click="steps_form = !steps_form" ng-hide="steps_form == true">
-             Add a step to your Goal!
-           </button>
-
-           <form ng-submit="step.createStep()" ng-show="steps_form">
-
-             <input type="text" ng-model="step.newStep">
-
-             <input type="submit" value="Add step!" ng-click="steps_form = false">
-
-             <button type="button" ng-click="steps_form = false">Cancel</button>
-         </form>
+          <button type="button"
+                  ng-click="GoalCtrl.deleteGoal(goal)"
+                  ng-hide="show_edit == true">
+            Delete this Goal
+          </button>
         </div>
 
-       <!-- Delete Button for Entire Goal -->
-       <button type="button" ng-click="GoalCtrl.deleteGoal(goal)" ng-hide="show_edit == true">Delete this Goal</button>
-       <br/>
-       <br/>
-     </div>
-     <br/>
-     <br/>
-   </div>
+        <div ng-controller="StepController as step"
+             id = "create_step">
+
+          <button ng-click="steps_form = !steps_form"
+                  ng-hide="steps_form == true">
+            Add a step to your Goal!
+          </button>
+
+          <form ng-submit="step.createStep()"
+                ng-show="steps_form">
+
+            <input type="text"
+                   ng-model="step.newStep">
+
+            <br/>
+
+            <input type="submit"
+                   value="Add step!"
+                   ng-click="steps_form = false">
+
+            <button type="button"
+                    ng-click="steps_form = false">
+              Cancel
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+      <div id="health_steps"
+           ng-repeat="step in goal.steps"
+           ng-controller="StepController as StepCtrl">
+
+        <form ng-submit="StepCtrl.editStep(step)"
+              ng-show="show_step_edit">
+
+          <input type="text"
+                 ng-model="step.step"
+                 placeholder="{{step.step}}">
+
+          <input type="submit"
+                 value="Submit Edit"
+                 ng-click="show_step_edit = false">
+
+          <button type="button"
+                  ng-click="show_step_edit = false">
+            Cancel
+          </button>
+
+        </form>
+
+        <span ng-hide="show_step_edit == true">
+          {{step.step}}
+        </span>
+
+        <div id="stepbuttons">
+
+          <button type="button"
+                  ng-click="StepCtrl.deleteStep(step)"
+                  ng-hide="show_step_edit == true">
+            Delete This Step
+          </button>
+
+          <button ng-click="show_step_edit = !show_step_edit"
+                  ng-hide="show_step_edit == true">
+            Edit This Step
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END HEALTH GOALS -->
+
+
+  <br/>
+
+
+  <!-- START FITNESS GOALS -->
+  <div id="allfitnessgoals">
+
+    <div id="fitnessgoals">
+      Your Fitness Goals
+    </div>
+
+      <div ng-if="goal.goal_type == 'Fitness'"
+           ng-show="goal in goal.current_user_goals"
+           ng-repeat="goal in goal.current_user_goals |
+                      orderBy: '-created_at'">
+
+      <div id="fitness_goal">
+
+        <form ng-submit="GoalCtrl.editGoal(goal)"
+              ng-show="show_edit">
+
+          Edit your goal!
+
+          <input type="text"
+                 ng-model="goal.description" placeholder="{{goal.description}}">
+
+          <input type="submit"
+                 value="Submit Edit"
+                ng-click="show_edit = false">
+
+          <button type="button"
+                  ng-click="show_edit = false">
+            Cancel
+          </button>
+
+        </form>
+
+        <span ng-hide="show_edit == true">
+          {{goal.description}}
+        </span>
+
+        <br/>
+
+        <div id="editgoalbutton">
+
+          <button ng-click="show_edit = !show_edit"
+                  ng-hide="show_edit == true">
+            Edit Your Goal
+          </button>
+
+          <button type="button"
+                  ng-click="GoalCtrl.deleteGoal(goal)"
+                  ng-hide="show_edit == true">
+            Delete this Goal
+          </button>
+        </div>
+
+        <div ng-controller="StepController as step"
+             id = "create_step">
+
+          <button ng-click="steps_form = !steps_form"
+                  ng-hide="steps_form == true">
+            Add a step to your Goal!
+          </button>
+
+          <form ng-submit="step.createStep()"
+                ng-show="steps_form">
+
+            <input type="text"
+                   ng-model="step.newStep">
+
+            <br/>
+
+            <input type="submit"
+                   value="Add step!"
+                   ng-click="steps_form = false">
+
+            <button type="button"
+                    ng-click="steps_form = false">
+              Cancel
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+      <div id="fitness_steps"
+           ng-repeat="step in goal.steps"
+           ng-controller="StepController as StepCtrl">
+
+        <form ng-submit="StepCtrl.editStep(step)"
+              ng-show="show_step_edit">
+
+          <input type="text"
+                 ng-model="step.step"
+                 placeholder="{{step.step}}">
+
+          <input type="submit"
+                 value="Submit Edit"
+                 ng-click="show_step_edit = false">
+
+          <button type="button"
+                  ng-click="show_step_edit = false">
+            Cancel
+          </button>
+
+        </form>
+
+        <span ng-hide="show_step_edit == true">
+          {{step.step}}
+        </span>
+
+        <div id="stepbuttons">
+
+          <button type="button"
+                  ng-click="StepCtrl.deleteStep(step)"
+                  ng-hide="show_step_edit == true">
+            Delete This Step
+          </button>
+
+          <button ng-click="show_step_edit = !show_step_edit"
+                  ng-hide="show_step_edit == true">
+            Edit This Step
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END FITNESS GOALS -->
+
+
+  <br/>
+
+
+  <!-- START PERSONAL GOALS -->
+  <div id="allpersonal">
+
+    <div id="personalgoals">
+      Your Personal Goals
+    </div>
+
+      <div ng-if="goal.goal_type == 'Personal'"
+           ng-show="goal in goal.current_user_goals"
+           ng-repeat="goal in goal.current_user_goals |
+                      orderBy: '-created_at'">
+
+      <div id="personal_goal">
+
+        <form ng-submit="GoalCtrl.editGoal(goal)"
+              ng-show="show_edit">
+
+          Edit your goal!
+
+          <input type="text"
+                 ng-model="goal.description" placeholder="{{goal.description}}">
+
+          <input type="submit"
+                 value="Submit Edit"
+                ng-click="show_edit = false">
+
+          <button type="button"
+                  ng-click="show_edit = false">
+            Cancel
+          </button>
+
+        </form>
+
+        <span ng-hide="show_edit == true">
+          {{goal.description}}
+        </span>
+
+        <br/>
+
+        <div id="editgoalbutton">
+
+          <button ng-click="show_edit = !show_edit"
+                  ng-hide="show_edit == true">
+            Edit Your Goal
+          </button>
+
+          <button type="button"
+                  ng-click="GoalCtrl.deleteGoal(goal)"
+                  ng-hide="show_edit == true">
+            Delete this Goal
+          </button>
+        </div>
+
+        <div ng-controller="StepController as step"
+             id = "create_step">
+
+          <button ng-click="steps_form = !steps_form"
+                  ng-hide="steps_form == true">
+            Add a step to your Goal!
+          </button>
+
+          <form ng-submit="step.createStep()"
+                ng-show="steps_form">
+
+            <input type="text"
+                   ng-model="step.newStep">
+
+            <br/>
+
+            <input type="submit"
+                   value="Add step!"
+                   ng-click="steps_form = false">
+
+            <button type="button"
+                    ng-click="steps_form = false">
+              Cancel
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+      <div id="personal_steps"
+           ng-repeat="step in goal.steps"
+           ng-controller="StepController as StepCtrl">
+
+        <form ng-submit="StepCtrl.editStep(step)"
+              ng-show="show_step_edit">
+
+          <input type="text"
+                 ng-model="step.step"
+                 placeholder="{{step.step}}">
+
+          <input type="submit"
+                 value="Submit Edit"
+                 ng-click="show_step_edit = false">
+
+          <button type="button"
+                  ng-click="show_step_edit = false">
+            Cancel
+          </button>
+
+        </form>
+
+        <span ng-hide="show_step_edit == true">
+          {{step.step}}
+        </span>
+
+        <div id="stepbuttons">
+
+          <button type="button"
+                  ng-click="StepCtrl.deleteStep(step)"
+                  ng-hide="show_step_edit == true">
+            Delete This Step
+          </button>
+
+          <button ng-click="show_step_edit = !show_step_edit"
+                  ng-hide="show_step_edit == true">
+            Edit This Step
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END PERSONAL GOALS -->
+
+
+  <br/>
+
+
+  <!-- START PROFESSIONAL GOALS -->
+  <div id="allprofessionalgoals">
+
+    <div id="professionalgoals">
+      Your Professional Goals
+    </div>
+
+      <div ng-if="goal.goal_type == 'Professional'"
+           ng-show="goal in goal.current_user_goals"
+           ng-repeat="goal in goal.current_user_goals |
+                      orderBy: '-created_at'">
+
+      <div id="professional_goal">
+
+        <form ng-submit="GoalCtrl.editGoal(goal)"
+              ng-show="show_edit">
+
+          Edit your goal!
+
+          <input type="text"
+                 ng-model="goal.description" placeholder="{{goal.description}}">
+
+          <input type="submit"
+                 value="Submit Edit"
+                ng-click="show_edit = false">
+
+          <button type="button"
+                  ng-click="show_edit = false">
+            Cancel
+          </button>
+
+        </form>
+
+        <span ng-hide="show_edit == true">
+          {{goal.description}}
+        </span>
+
+        <br/>
+
+        <div id="editgoalbutton">
+
+          <button ng-click="show_edit = !show_edit"
+                  ng-hide="show_edit == true">
+            Edit Your Goal
+          </button>
+
+          <button type="button"
+                  ng-click="GoalCtrl.deleteGoal(goal)"
+                  ng-hide="show_edit == true">
+            Delete this Goal
+          </button>
+        </div>
+
+        <div ng-controller="StepController as step"
+             id = "create_step">
+
+          <button ng-click="steps_form = !steps_form"
+                  ng-hide="steps_form == true">
+            Add a step to your Goal!
+          </button>
+
+          <form ng-submit="step.createStep()"
+                ng-show="steps_form">
+
+            <input type="text"
+                   ng-model="step.newStep">
+
+            <br/>
+
+            <input type="submit"
+                   value="Add step!"
+                   ng-click="steps_form = false">
+
+            <button type="button"
+                    ng-click="steps_form = false">
+              Cancel
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+      <div id="professional_steps"
+           ng-repeat="step in goal.steps"
+           ng-controller="StepController as StepCtrl">
+
+        <form ng-submit="StepCtrl.editStep(step)"
+              ng-show="show_step_edit">
+
+          <input type="text"
+                 ng-model="step.step"
+                 placeholder="{{step.step}}">
+
+          <input type="submit"
+                 value="Submit Edit"
+                 ng-click="show_step_edit = false">
+
+          <button type="button"
+                  ng-click="show_step_edit = false">
+            Cancel
+          </button>
+
+        </form>
+
+        <span ng-hide="show_step_edit == true">
+          {{step.step}}
+        </span>
+
+        <div id="stepbuttons">
+
+          <button type="button"
+                  ng-click="StepCtrl.deleteStep(step)"
+                  ng-hide="show_step_edit == true">
+            Delete This Step
+          </button>
+
+          <button ng-click="show_step_edit = !show_step_edit"
+                  ng-hide="show_step_edit == true">
+            Edit This Step
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END PROFESSIONAL GOALS -->
+
+
+
+<!-- applies to overall goals div -->
+</div>

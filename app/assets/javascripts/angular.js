@@ -142,7 +142,6 @@ app.controller('StepController', ['$http', '$scope', '$route', function($http, $
         }
       }).success(function(stepData){
       });
-      $route.reload();
     };
 
     // edit a step
